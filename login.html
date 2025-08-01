@@ -633,7 +633,7 @@
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
         
-        if (scriptURL === 'https://script.google.com/macros/s/AKfycby8OQm5TRya5zviGEACwIc11-gChwNLs7IrUBkIo61LCYzCaEOXz7XVIqpAtHpqUAx8/exec') {
+        if (scriptURL === 'YOUR_NEW_SCRIPT_URL_HERE') {
             formStatus.textContent = 'Error: Script URL is not configured.';
             formStatus.className = 'error';
             return;
@@ -643,47 +643,31 @@
         submitButton.disabled = true;
         submitButton.textContent = 'Logging In...';
 
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        const callbackName = 'handleLoginResponse';
-        let script = document.createElement('script');
+        const formData = new FormData(loginForm);
+        formData.append('action', 'login');
 
-        const timeout = setTimeout(() => {
-            delete window[callbackName];
-            if(document.body.contains(script)){
-                document.body.removeChild(script);
-            }
-            formStatus.textContent = 'Request timed out. Please try again.';
-            formStatus.className = 'error';
-            submitButton.disabled = false;
-            submitButton.textContent = 'Login';
-        }, 8000); // 8 second timeout
-
-        window[callbackName] = function(data) {
-            clearTimeout(timeout);
-            delete window[callbackName];
-            if(document.body.contains(script)){
-                document.body.removeChild(script);
-            }
-
-            if (data.result === 'success') {
-                localStorage.setItem('escorpUser', email);
-                formStatus.textContent = 'Login successful! Redirecting...';
-                formStatus.className = 'success';
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
-            } else {
-                formStatus.textContent = data.error.replace('Error: ', '');
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    localStorage.setItem('escorpUser', document.getElementById('email').value);
+                    formStatus.textContent = 'Login successful! Redirecting...';
+                    formStatus.className = 'success';
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    throw new Error(data.error || 'Login failed.');
+                }
+            })
+            .catch(error => {
+                formStatus.textContent = error.message.replace('Error: ', '');
                 formStatus.className = 'error';
-            }
-            submitButton.disabled = false;
-            submitButton.textContent = 'Login';
-        };
-
-        script.src = `${scriptURL}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&callback=${callbackName}`;
-        document.body.appendChild(script);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Login';
+            });
     });
     
     forgotPasswordLink.addEventListener('click', () => {
@@ -759,3 +743,7 @@
                 submitButton.disabled = false;
                 submitButton.textContent = 'Reset Password';
             });
+    });
+  </script>
+</body>
+</html>
