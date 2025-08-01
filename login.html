@@ -62,6 +62,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      box-shadow: 0 0 20px rgba(92, 107, 192, 0.4);
       transition: transform 0.5s ease;
     }
     
@@ -70,6 +71,11 @@
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
+    }
+
+    .logo:hover {
+      transform: rotate(10deg) scale(1.05);
+      box-shadow: 0 0 30px rgba(92, 107, 192, 0.6);
     }
 
     .brand-info {
@@ -398,6 +404,10 @@
       100% { transform: translateY(0px); }
     }
 
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+
     /* Responsive Design */
     @media (max-width: 992px) { /* Breakpoint for nav */
         nav ul {
@@ -445,7 +455,7 @@
   <header>
     <div class="logo-container">
       <div class="logo floating">
-        <img src="Black and Yellow Square Industrial Logo.png" alt="Escorp Industries Logo"
+        <img src="http://googleusercontent.com/file_content/1" alt="Escorp Industries Logo"
              onerror="this.onerror=null;this.src='https://placehold.co/60x60/1a237e/ffffff?text=Error';">
       </div>
       <div class="brand-info">
@@ -637,7 +647,19 @@
         const password = document.getElementById('password').value;
         
         const callbackName = 'handleLoginResponse';
+        let script = document.createElement('script');
+
+        const timeout = setTimeout(() => {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            formStatus.textContent = 'Request timed out. Please try again.';
+            formStatus.className = 'error';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Login';
+        }, 8000); // 8 second timeout
+
         window[callbackName] = function(data) {
+            clearTimeout(timeout);
             delete window[callbackName];
             document.body.removeChild(script);
 
@@ -649,14 +671,13 @@
                     window.location.href = 'index.html';
                 }, 1500);
             } else {
-                formStatus.textContent = 'Invalid email or password.';
+                formStatus.textContent = data.error.replace('Error: ', '');
                 formStatus.className = 'error';
             }
             submitButton.disabled = false;
             submitButton.textContent = 'Login';
         };
 
-        const script = document.createElement('script');
         script.src = `${scriptURL}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&callback=${callbackName}`;
         document.body.appendChild(script);
     });
