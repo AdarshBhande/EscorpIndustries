@@ -244,7 +244,7 @@
       font-weight: 700;
       margin-bottom: 10px;
       font-family: 'Montserrat', sans-serif;
-      text-shadow: 0 0 10px rgba(92, 107, 192, 0.5);
+      text-shadow: 0 0 10px rgba(92, 107, 192, 0.7);
     }
 
     .login-form form {
@@ -633,7 +633,7 @@
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
         
-        if (scriptURL === 'YOUR_NEW_SCRIPT_URL_HERE') {
+        if (scriptURL === 'https://script.google.com/macros/s/AKfycby8OQm5TRya5zviGEACwIc11-gChwNLs7IrUBkIo61LCYzCaEOXz7XVIqpAtHpqUAx8/exec') {
             formStatus.textContent = 'Error: Script URL is not configured.';
             formStatus.className = 'error';
             return;
@@ -651,7 +651,9 @@
 
         const timeout = setTimeout(() => {
             delete window[callbackName];
-            document.body.removeChild(script);
+            if(document.body.contains(script)){
+                document.body.removeChild(script);
+            }
             formStatus.textContent = 'Request timed out. Please try again.';
             formStatus.className = 'error';
             submitButton.disabled = false;
@@ -661,7 +663,9 @@
         window[callbackName] = function(data) {
             clearTimeout(timeout);
             delete window[callbackName];
-            document.body.removeChild(script);
+            if(document.body.contains(script)){
+                document.body.removeChild(script);
+            }
 
             if (data.result === 'success') {
                 localStorage.setItem('escorpUser', email);
@@ -755,7 +759,3 @@
                 submitButton.disabled = false;
                 submitButton.textContent = 'Reset Password';
             });
-    });
-  </script>
-</body>
-</html>
