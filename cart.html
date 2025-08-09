@@ -71,7 +71,6 @@
         border-radius: 50%;
         object-fit: cover;
     }
-    
     .brand-info {
         text-align: left;
     }
@@ -436,6 +435,7 @@
       100% { transform: translateY(0px); }
     }
 
+
     /* Responsive Design */
     @media (max-width: 992px) { /* Breakpoint for nav */
         nav ul {
@@ -549,7 +549,7 @@
       <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/escorpindustries?igsh=MWJ6OHg4MDEydDYyMQ=="><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
       
@@ -680,8 +680,9 @@
             itemsContainer.appendChild(itemElement);
         });
         
-        const deliveryCharge = 50;
-        const grandTotal = subtotal + deliveryCharge;
+        const platformFee = 5;
+        const deliveryCharge = 150;
+        const grandTotal = subtotal + platformFee + deliveryCharge;
 
         const summaryElement = document.createElement('div');
         summaryElement.className = 'cart-summary';
@@ -690,6 +691,10 @@
             <div class="summary-row">
                 <span>Subtotal</span>
                 <span>₹${subtotal.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="summary-row">
+                <span>Platform Fee</span>
+                <span>₹${platformFee.toLocaleString('en-IN')}</span>
             </div>
             <div class="summary-row">
                 <span>Delivery Charge</span>
@@ -772,8 +777,9 @@
                     cartDetailsText += `${item.name} (Qty: ${item.quantity}) - ${item.price}\n`;
                 });
                 
-                const deliveryCharge = 50;
-                const grandTotal = total + deliveryCharge;
+                const platformFee = 5;
+                const deliveryCharge = 150;
+                const grandTotal = total + platformFee + deliveryCharge;
                 const grandTotalText = `₹${grandTotal.toLocaleString('en-IN')}`;
 
                 // Generate a unique order ID
@@ -798,4 +804,3 @@
   </script>
 </body>
 </html>
-

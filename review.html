@@ -72,6 +72,7 @@
         object-fit: cover;
     }
 
+
     .brand-info {
         text-align: left;
     }
@@ -417,6 +418,7 @@
       100% { transform: translateY(0px); }
     }
 
+
     /* Responsive Design */
     @media (max-width: 992px) { /* Breakpoint for nav */
         nav ul {
@@ -479,7 +481,7 @@
                 <a href="#">Login</a>
                 <div class="login-dropdown">
                     <a href="login.html">Login</a>
-                    <a href="signup.html">Register</a>
+                    <a href="signup.html">Sign Up</a>
                 </div>
             </li>
         </ul>
@@ -529,9 +531,9 @@
       <div class="footer-tagline">BUILDING WHAT MATTERS</div>
       
       <div class="social-icons">
-        <a href="https://www.instagram.com/escorpindustries?igsh=MXF3c2h1NzFscXB4MA=="><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/escorpindustries?igsh=MWJ6OHg4MDEydDYyMQ=="><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
       
@@ -589,7 +591,7 @@
     });
 
     // Review Logic
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby8OQm5TRya5zviGEACwIc11-gChwNLs7IrUBkIo61LCYzCaEOXz7XVIqpAtHpqUAx8/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw35Yl3XrtHOlxMvysfIoqo-MkeHRQE76XxmWuiL3_yt0hBQdobOyi8cJyI_ZkcsrYA/exec';
     const reviewForm = document.getElementById('review-form');
     const formStatus = document.getElementById('form-status');
     const reviewsGrid = document.getElementById('reviews-grid');
@@ -632,21 +634,15 @@
                 <div class="stars">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
-                <p>“Escorp is literally a student’s best friend!”
-                   I found everything I needed for college—stationery, phone accessories, even late-night snacks—all in one place. The best part? Their event support service helped our college fest run smoothly. Super fast 
-                   delivery and friendly support. It’s like Amazon, but made for students.
-                </p>
-                <div class="author">- Dhiraj Pardeshi</div>
+                <p>"Escorp Industries delivered beyond our expectations. Their professionalism and attention to detail were outstanding throughout the entire project. Highly recommended!"</p>
+                <div class="author">- Sarah L.</div>
             </div>
             <div class="review-card">
                 <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                 </div>
-                <p>“Escorp is literally a student’s best friend!”
-                  I found everything I needed for college—stationery, phone accessories, even late-night snacks—all in one place. The best part? Their event support service helped our college fest run smoothly.
-                   Super fast delivery and friendly support. It’s like Amazon, but made for students.
-                </p>
-                <div class="author">- Aryan Surwade</div>
+                <p>"A fantastic team to work with. They were communicative, efficient, and the quality of their work is top-notch. We are thrilled with the final result."</p>
+                <div class="author">- Mark T.</div>
             </div>
         `;
         reviewsGrid.innerHTML = staticReviews;
@@ -708,4 +704,3 @@
   </script>
 </body>
 </html>
-

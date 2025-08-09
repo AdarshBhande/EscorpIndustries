@@ -62,7 +62,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 20px rgba(92, 107, 192, 0.4);
       transition: transform 0.5s ease;
     }
     
@@ -73,10 +72,6 @@
         object-fit: cover;
     }
 
-    .logo:hover {
-      transform: rotate(10deg) scale(1.05);
-      box-shadow: 0 0 30px rgba(92, 107, 192, 0.6);
-    }
 
     .brand-info {
         text-align: left;
@@ -420,9 +415,6 @@
       100% { transform: translateY(0px); }
     }
 
-    .floating {
-      animation: float 4s ease-in-out infinite;
-    }
 
     /* Responsive Design */
     @media (max-width: 992px) { /* Breakpoint for nav */
@@ -471,7 +463,7 @@
   <header>
     <div class="logo-container">
       <div class="logo floating">
-        <img src="http://googleusercontent.com/file_content/1" alt="Escorp Industries Logo"
+        <img src="escorp.jpg" alt="Escorp Industries Logo"
              onerror="this.onerror=null;this.src='https://placehold.co/60x60/1a237e/ffffff?text=Error';">
       </div>
       <div class="brand-info">
@@ -486,7 +478,13 @@
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="review.html">Review</a></li>
-            <li ><a href="login.html">Login</a></li>
+            <li class="login-item">
+                <a href="#">Login</a>
+                <div class="login-dropdown">
+                    <a href="login.html">Login</a>
+                    <a href="signup.html">Sign Up</a>
+                </div>
+            </li>
         </ul>
         <div class="menu-toggle" id="mobile-menu">
             <div class="bar"></div>
@@ -537,9 +535,9 @@
       <div class="footer-tagline">BUILDING WHAT MATTERS</div>
       
       <div class="social-icons">
-        <a href="https://www.instagram.com/escorpindustries?igsh=MXF3c2h1NzFscXB4MA=="><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/escorpindustries?igsh=MWJ6OHg4MDEydDYyMQ=="><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
       
@@ -601,7 +599,7 @@
     const verifySection = document.getElementById('verify-section');
     const formStatus = document.getElementById('form-status');
     const userEmailSpan = document.getElementById('user-email');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby8OQm5TRya5zviGEACwIc11-gChwNLs7IrUBkIo61LCYzCaEOXz7XVIqpAtHpqUAx8/exec'; // IMPORTANT: Replace with your script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw35Yl3XrtHOlxMvysfIoqo-MkeHRQE76XxmWuiL3_yt0hBQdobOyi8cJyI_ZkcsrYA/exec'; // IMPORTANT: Replace with your script URL
 
     signupForm.addEventListener('submit', e => {
         e.preventDefault();
@@ -702,4 +700,3 @@
   </script>
 </body>
 </html>
-

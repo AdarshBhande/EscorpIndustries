@@ -62,7 +62,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 20px rgba(92, 107, 192, 0.4);
       transition: transform 0.5s ease;
     }
     
@@ -73,10 +72,6 @@
         object-fit: cover;
     }
 
-    .logo:hover {
-      transform: rotate(10deg) scale(1.05);
-      box-shadow: 0 0 30px rgba(92, 107, 192, 0.6);
-    }
 
     .brand-info {
         text-align: left;
@@ -253,6 +248,10 @@
         gap: 20px;
     }
 
+    .password-container {
+        position: relative;
+    }
+
     .login-form input {
         width: 100%;
         padding: 15px;
@@ -261,6 +260,19 @@
         background: rgba(20, 24, 44, 0.7);
         color: #e0e0ff;
         font-size: 16px;
+    }
+    
+    .password-container input {
+        padding-right: 45px;
+    }
+    
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #7986cb;
     }
     
     .login-form input:focus {
@@ -404,9 +416,6 @@
       100% { transform: translateY(0px); }
     }
 
-    .floating {
-      animation: float 4s ease-in-out infinite;
-    }
 
     /* Responsive Design */
     @media (max-width: 992px) { /* Breakpoint for nav */
@@ -455,7 +464,7 @@
   <header>
     <div class="logo-container">
       <div class="logo floating">
-        <img src="http://googleusercontent.com/file_content/1" alt="Escorp Industries Logo"
+        <img src="escorp.jpg" alt="Escorp Industries Logo"
              onerror="this.onerror=null;this.src='https://placehold.co/60x60/1a237e/ffffff?text=Error';">
       </div>
       <div class="brand-info">
@@ -504,7 +513,10 @@
             <div class="login-form">
                 <form id="login-form">
                     <input type="email" name="email" id="email" placeholder="Your Email" required>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <div class="password-container">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                        <i class="fas fa-eye toggle-password" data-target="password"></i>
+                    </div>
                     <button type="submit">Login</button>
                 </form>
                 
@@ -519,7 +531,10 @@
                     <form id="verify-reset-form">
                          <p style="margin-bottom: 15px;">An OTP has been sent to your email.</p>
                         <input type="text" name="otp" placeholder="Enter OTP" required>
-                        <input type="password" name="password" id="new-password" placeholder="New Password" required>
+                        <div class="password-container">
+                            <input type="password" name="password" id="new-password" placeholder="New Password" required>
+                            <i class="fas fa-eye toggle-password" data-target="new-password"></i>
+                        </div>
                         <button type="submit">Reset Password</button>
                     </form>
                 </div>
@@ -542,7 +557,7 @@
       <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/escorpindustries?igsh=MWJ6OHg4MDEydDYyMQ=="><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
       
@@ -613,7 +628,7 @@
     const verifyResetForm = document.getElementById('verify-reset-form');
     
     const formStatus = document.getElementById('form-status');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbw35Yl3XrtHOlxMvysfIoqo-MkeHRQE76XxmWuiL3_yt0hBQdobOyi8cJyI_ZkcsrYA/exec'; // IMPORTANT: Replace with your script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw35Yl3XrtHOlxMvysfIoqo-MkeHRQE76XxmWuiL3_yt0hBQdobOyi8cJyI_ZkcsrYA/exec';
 
     // Check for logged in user on page load
     document.addEventListener('DOMContentLoaded', () => {
@@ -744,7 +759,24 @@
                 submitButton.textContent = 'Reset Password';
             });
     });
+
+    // Password visibility toggle
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('toggle-password')) {
+            const targetId = e.target.getAttribute('data-target');
+            const passwordInput = document.getElementById(targetId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                e.target.classList.remove('fa-eye');
+                e.target.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                e.target.classList.remove('fa-eye-slash');
+                e.target.classList.add('fa-eye');
+            }
+        }
+    });
   </script>
 </body>
 </html>
-
